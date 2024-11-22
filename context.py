@@ -3,7 +3,7 @@ import json
 import os
 import regex as re
 
-class Context:
+class MarketPredictorContext:
     def __init__(self):
         self._config_path = os.path.join(os.path.dirname(__file__), 'config.json')
         self._get_config()

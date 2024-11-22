@@ -1,11 +1,17 @@
-from context import Context
+from context import MarketPredictorContext
+from alpha_vantage_api import *
+from models.AlphaVantage import get_function
 import requests 
 import json
 
-context = Context()
+context = MarketPredictorContext()
 
-symbol = "AAPL"
-
-result = context.api._alpha_vantage.get_daily(symbol)
-
+# from the user
+symbol = input("Enter a symbol: ")
+timeframe = input("Enter a timeframe: ")
+# behind the scenes
+# stock = context.api.execute('stock_symbol_search', symbol=symbol)
+function = get_function(timeframe)
+result = context.api.execute('fetch_stock_prices', function=function, symbol=symbol)
+print(result.head())
 pass
