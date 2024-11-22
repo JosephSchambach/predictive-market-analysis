@@ -1,11 +1,11 @@
 from context import Context
+import requests 
+import json
 
 context = Context()
 
-function = "TIME_SERIES_DAILY"
 symbol = "AAPL"
 
-url = context.secrets['alpha_vantage_url']
-
+result = context.api._alpha_vantage.get_daily(symbol)
 
 pass
