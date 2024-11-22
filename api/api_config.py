@@ -1,4 +1,4 @@
-from alpha_vantage_api import AlphaVantageAPI
+from api.alpha_vantage_api import AlphaVantageAPI
 import requests
 
 class API():
