@@ -1,5 +1,5 @@
 from context import MarketPredictorContext
-from alpha_vantage_api import *
+from api.alpha_vantage_api import *
 from models.AlphaVantage import get_function
 import requests 
 import json
