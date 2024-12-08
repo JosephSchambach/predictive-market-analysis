@@ -39,4 +39,25 @@ def moving_average_convergence_divergence(df: pd.DataFrame, short_period: int, l
     except Exception as e:
         print(f"An error occurred: {e}")
 
+def bollinger_bands(df: pd.DataFrame, length: int, std: int, column: str):
+    try:
+        if isinstance(length, int) and isinstance(std, int) and column in df.columns:
+            temp_df = df[['date',column]]
+            temp_df.set_index('date', inplace=True)
+            temp_df.ta.bbands(length=length, std=std, append=True)
+            temp_df.reset_index(inplace=True)
+            columns_to_merge = ['date',f"BBL_{length}_{std}.0",f"BBM_{length}_{std}.0",f"BBU_{length}_{std}.0",f"BBB_{length}_{std}.0",f"BBP_{length}_{std}.0"]
+            return df.merge(temp_df[columns_to_merge], on='date', how='left')
+    except Exception as e:
+        print(f"An error occurred: {e}")
 
+def on_balance_volume(df: pd.DataFrame, column: str): 
+    try: 
+        if column in df.columns:
+            temp_df = df[['date',column, 'volume']]
+            temp_df.set_index('date', inplace=True)
+            temp_df.ta.obv(append=True)
+            temp_df.reset_index(inplace=True)
+            return df.merge(temp_df[['date','OBV']], on='date', how='left')
+    except Exception as e:
+        print(f"An error occurred: {e}")
