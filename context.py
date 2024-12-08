@@ -1,4 +1,4 @@
-from api_config import API
+from api.api_config import API
 import json
 import os
 import regex as re
