@@ -1,4 +1,5 @@
 from api.api_config import API
+from database.database_config import Database
 import json
 import os
 import regex as re
@@ -9,6 +10,7 @@ class MarketPredictorContext:
         self._get_config()
         self._get_secrets()
         self._get_api()
+        self._get_database()
 
 
     def _get_config(self):
@@ -29,3 +31,7 @@ class MarketPredictorContext:
         api_config = self.secrets
         config = self.config['secrets']
         self.api = API(api_config=api_config, config=config)
+
+    def _get_database(self):
+        if 'database' not in self.config['secrets']: return
+        self.database = Database(database_config=self.config['secrets']['database'])
