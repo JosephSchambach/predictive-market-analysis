@@ -1,5 +1,4 @@
 from context import MarketPredictorContext
-from api.alpha_vantage_api import *
 from models.AlphaVantage import get_function
 import analysis.technical_indicators as ti
 from matplotlib import pyplot as plt
@@ -8,6 +7,8 @@ import requests
 import json
 
 context = MarketPredictorContext()
+
+data = context.database.query('person')
 
 symbol = 'AAPL'
 timeframe = 'daily'
