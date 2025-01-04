@@ -1,8 +1,12 @@
+from predictive_market_analysis.context.predictor_context import MarketPredictorContext
+
+context = MarketPredictorContext()
+
 def get_function(timeframe: str, interval=None):
     try:
-        if len(timeframe) == 0: return None
         if timeframe not in ['daily','intraday','daily_adjusted','weekly','weekly_adjusted','monthly','monthly_adjusted']:
-            raise ValueError("Invalid timeframe")
+            context.logger.log(f"Invalid timeframe: {timeframe}", 'ERROR')
+            raise ValueError(f"Invalid timeframe: {timeframe}")
         if len(timeframe.split())> 1: timeframe = '_'.join(timeframe.split())
         timeframe = timeframe.lower()
         if timeframe == 'intraday' and interval is None: interval = '5min'
@@ -18,5 +22,4 @@ def get_function(timeframe: str, interval=None):
         }
         return func_dict[timeframe]
     except Exception as e:
-        print(f"An error occurred: {e}")
-        return None
+        context.logger.log(f"An error occurred in AlphaVantage get_function: {str(e)}", 'ERROR')

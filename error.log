@@ -1,0 +1,1 @@
+2025-01-04 15:17:37,191 - custom_logger - CRITICAL - Database action insert failed with error: Object of type Timestamp is not JSON serializable

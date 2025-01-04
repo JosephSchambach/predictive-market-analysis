@@ -1,6 +1,6 @@
-from api.api_config import API
-from logging_context import Logger
-from database.database_config import Database
+from predictive_market_analysis.api.api_config import API
+from predictive_market_analysis.context.logging_context import Logger
+from predictive_market_analysis.database.database_config import Database
 import json
 import os
 
