@@ -1,16 +1,21 @@
 from api.api_config import API
+from logging_context import Logger
+from database.database_config import Database
 import json
 import os
-import regex as re
 
 class MarketPredictorContext:
     def __init__(self):
         self._config_path = os.path.join(os.path.dirname(__file__), 'config.json')
+        self._get_logger()
         self._get_config()
         self._get_secrets()
         self._get_api()
+        self._get_database()
 
-
+    def _get_logger(self): 
+        self.logger = Logger()
+        
     def _get_config(self):
         if self._config_path is None: return
         with open(self._config_path, 'r') as config_file:
@@ -28,4 +33,8 @@ class MarketPredictorContext:
     def _get_api(self):
         api_config = self.secrets
         config = self.config['secrets']
-        self.api = API(api_config=api_config, config=config)
+        self.api = API(api_config=api_config, config=config, logger=self.logger)
+
+    def _get_database(self):
+        if 'database' not in self.config['secrets']: return
+        self.database = Database(database_config=self.config['secrets']['database'], logger=self.logger)
