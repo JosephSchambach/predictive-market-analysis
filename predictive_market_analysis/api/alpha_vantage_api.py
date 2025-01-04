@@ -1,7 +1,7 @@
 import requests
 import json
 import pandas as pd
-from models.AlphaVantage import get_function
+from predictive_market_analysis.models.AlphaVantage import get_function
 
 class AlphaVantageAPI: 
     def __init__(self, api_config): 
@@ -28,6 +28,7 @@ class AlphaVantageAPI:
                             '5. volume': 'volume'
                         }, inplace=True)
         df['date'] = pd.to_datetime(df['date'])
+        df['date'] = df['date'].dt.date
         for col in ['open', 'high', 'low', 'close', 'volume']:
             df[col] = pd.to_numeric(df[col])
         return df   

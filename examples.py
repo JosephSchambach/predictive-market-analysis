@@ -1,4 +1,4 @@
-from context import MarketPredictorContext
+from context.context import MarketPredictorContext
 from models.AlphaVantage import get_function
 import analysis.technical_indicators as ti
 from matplotlib import pyplot as plt
