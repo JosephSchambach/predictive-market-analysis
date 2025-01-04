@@ -7,9 +7,19 @@ import requests
 import json
 
 context = MarketPredictorContext()
+
 data = context.api.execute('file_read', file='result.csv')
 data = data[['date', 'close']]
-context.database.upsert('apple_data_raw', data)
+context.database.insert('apple_data_raw', data)
+
+data_from_sb = context.database.select('apple_data_raw', ['date', 'close'])
+data_from_sb.loc[len(data_from_sb)] = ['2021-07-21', 110.0]
+context.database.upsert('apple_data_raw', data_from_sb)
+
+
+context.logger.log('Starting the test')
+context.logger.log("This is a test", 'ERROR')
+context.logger.log("This is a test", 'CRITICAL')
 
 symbol = 'AAPL'
 timeframe = 'daily'

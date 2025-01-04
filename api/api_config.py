@@ -5,7 +5,8 @@ import requests
 import os
 
 class API():
-    def __init__(self, api_config, config): 
+    def __init__(self, api_config, config, logger): 
+        self.logger = logger
         if 'alpha_vantage' in config:
             self._alpha_vantage = AlphaVantageAPI(api_config=api_config)
         if 'dashboard' in config:
@@ -14,6 +15,7 @@ class API():
             self._files = config['file']['path']
 
     def execute(self, method_name, **kwargs):
+        self.logger.log(f"Executing method: {method_name}")
         try:
             if self._alpha_vantage and hasattr(self._alpha_vantage, method_name):
                 method = getattr(self._alpha_vantage, method_name)
@@ -33,6 +35,7 @@ class API():
             return None
     
     def visualize(self, method_name, **kwargs):
+        self.logger.log(f'Visualizing data using method: {method_name}')
         if self._alpha_vantage and hasattr(self._alpha_vantage, method_name):
             method = getattr(self._alpha_vantage, method_name)
             return method(**kwargs)
