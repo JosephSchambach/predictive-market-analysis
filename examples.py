@@ -1,8 +1,8 @@
-from context.context import MarketPredictorContext
-from models.AlphaVantage import get_function
-import analysis.technical_indicators as ti
+from predictive_market_analysis.context.predictor_context import MarketPredictorContext
+from predictive_market_analysis.models.AlphaVantage import get_function
+import predictive_market_analysis.analysis.technical_indicators as ti
 from matplotlib import pyplot as plt
-from api import dashboard_api
+from predictive_market_analysis.api import dashboard_api
 import requests 
 import json
 

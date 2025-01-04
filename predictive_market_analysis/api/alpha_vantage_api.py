@@ -4,8 +4,9 @@ import pandas as pd
 from predictive_market_analysis.models.AlphaVantage import get_function
 
 class AlphaVantageAPI: 
-    def __init__(self, api_config): 
+    def __init__(self, api_config, logger): 
         self.base_url = api_config['alpha_vantage_url'] + api_config['alpha_vantage_api_key']
+        self.logger=logger
 
     def fetch_stock_prices(self, timeframe, symbol): 
         function_output = get_function(timeframe)
@@ -14,6 +15,7 @@ class AlphaVantageAPI:
         url = self.base_url + f"&function={function}&symbol={symbol}&outputsize=full"
         response = requests.get(url)
         if response.status_code != 200: 
+            self.logger.log(f"Error fetching stock prices for {symbol} at {timeframe}", 'CRITICAL')
             return None
         bytes_data = response.content.decode('utf-8')
         json_data = json.loads(bytes_data)
@@ -28,7 +30,7 @@ class AlphaVantageAPI:
                             '5. volume': 'volume'
                         }, inplace=True)
         df['date'] = pd.to_datetime(df['date'])
-        df['date'] = df['date'].dt.date
+        df['date'] = df['date'].dt.strftime('%Y-%m-%d')
         for col in ['open', 'high', 'low', 'close', 'volume']:
             df[col] = pd.to_numeric(df[col])
         return df   

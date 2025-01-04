@@ -2,8 +2,8 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 class DashboardAPI:
-    def __init__(self):
-        pass
+    def __init__(self, logger):
+        self.logger = logger
 
     def plot(self, data: pd.DataFrame, x: str | list, y: str | list, title='plot',xlabel='x', ylabel='y'):
         if isinstance(x, str):
