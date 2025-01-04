@@ -7,8 +7,9 @@ import requests
 import json
 
 context = MarketPredictorContext()
-
-data = context.database.query('person')
+data = context.api.execute('file_read', file='result.csv')
+data = data[['date', 'close']]
+context.database.upsert('apple_data_raw', data)
 
 symbol = 'AAPL'
 timeframe = 'daily'
