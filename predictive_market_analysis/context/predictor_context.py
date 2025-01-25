@@ -1,6 +1,7 @@
 from predictive_market_analysis.api.api_config import API
 from predictive_market_analysis.context.logging_context import Logger
 from predictive_market_analysis.database.database_config import Database
+from predictive_market_analysis.ml_model.model_config import MLModelConfig
 import json
 import os
 
@@ -12,6 +13,7 @@ class MarketPredictorContext:
         self._get_secrets()
         self._get_api()
         self._get_database()
+        self._get_ml_model()
 
     def _get_logger(self): 
         self.logger = Logger()
@@ -38,3 +40,6 @@ class MarketPredictorContext:
     def _get_database(self):
         if 'database' not in self.config['secrets']: return
         self.database = Database(database_config=self.config['secrets']['database'], logger=self.logger)
+
+    def _get_ml_model(self): 
+        self.model = MLModelConfig(self)

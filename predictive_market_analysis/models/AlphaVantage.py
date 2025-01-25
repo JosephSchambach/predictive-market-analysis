@@ -1,6 +1,3 @@
-from predictive_market_analysis.context.predictor_context import MarketPredictorContext
-
-context = MarketPredictorContext()
 
 def get_function(timeframe: str, interval=None):
     try:
