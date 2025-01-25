@@ -16,10 +16,12 @@ class Database():
                     raise ValueError("Table name cannot be empty.")
                 processed_columns = self._process_columns(columns)
                 self.logger.log(f"Selecting columns: {processed_columns}")
-                response = self._supabase.table(table).select(processed_columns).execute()
+                response = self._supabase.table(table).select(processed_columns).gt("date", "2023-12-31").order("date", desc=False).execute()
                 if response.data is None:
                     return
                 df = pd.DataFrame(response.data)
+                if 'date' in df.columns:
+                    df['date'] = pd.to_datetime(df['date'])
                 return df
             except Exception as e:
                 self.logger.log(f"Database select action select failed with error: {str(e)}",'CRITICAL')

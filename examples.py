@@ -3,10 +3,23 @@ from predictive_market_analysis.models.AlphaVantage import get_function
 import predictive_market_analysis.analysis.technical_indicators as ti
 from matplotlib import pyplot as plt
 from predictive_market_analysis.api import dashboard_api
+import pandas as pd
 import requests 
 import json
 
 context = MarketPredictorContext()
+
+data = context.database.select('apple_data_raw', ['date', 'close'])
+# Plotting the data
+plt.figure(figsize=(10, 5))
+plt.plot(data['date'], data['close'], label='Close Price')
+plt.xticks(data['date'][::100], rotation=45)
+plt.xlabel('Date')
+plt.ylabel('Close Price')
+plt.title('Stock Close Price Over Time')
+plt.legend()
+plt.grid(True) 
+plt.show()
 
 data = context.api.execute('file_read', file='result.csv')
 data = data[['date', 'close']]
