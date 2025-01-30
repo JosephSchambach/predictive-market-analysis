@@ -1,1 +1,3 @@
 2025-01-04 15:17:37,191 - custom_logger - CRITICAL - Database action insert failed with error: Object of type Timestamp is not JSON serializable
+2025-01-29 20:52:31,508 - custom_logger - CRITICAL - Database action insert failed with error: {}
+2025-01-29 20:52:31,838 - custom_logger - CRITICAL - Database select action select failed with error: {'code': '42P01', 'details': None, 'hint': None, 'message': 'relation "public.apple_data_raw" does not exist'}
