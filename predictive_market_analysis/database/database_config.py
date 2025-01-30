@@ -22,6 +22,8 @@ class Database():
                 df = pd.DataFrame(response.data)
                 if 'date' in df.columns:
                     df['date'] = pd.to_datetime(df['date'])
+                if 'close' in df.columns:
+                    df['close'] = df['close'].astype(float)
                 return df
             except Exception as e:
                 self.logger.log(f"Database select action select failed with error: {str(e)}",'CRITICAL')
