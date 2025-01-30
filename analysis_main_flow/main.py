@@ -11,19 +11,21 @@ class MainFlowHandler():
         self.context = context
     
     def run(self):
-        self.context.logger.log('Starting the main flow')
+        context.logger.log('Starting the main flow')
 
         self.ticker = input("Enter a ticker: ")
         self.timeframe = input("Enter a timeframe: ")
-        self.api_data_raw = self.context.api.execute('fetch_stock_prices', symbol=self.ticker, timeframe=self.timeframe)
+        self.api_data_raw = context.api.execute('fetch_stock_prices', symbol=self.ticker, timeframe=self.timeframe)
 
         self.api_data_cleaned = self.api_data_raw[['date', 'close']]
 
-        self.context.database.insert('apple_data_raw', self.api_data_cleaned)
+        context.database.insert('apple_data_raw', self.api_data_cleaned)
 
-        self.data_from_db = self.context.database.select('apple_data_raw', ['date', 'close'])
-        print(self.data_from_db.head())
-        forecast = self.context.model.forecast(LSTMModel(data=self.data_from_db,forecast_steps=2,lookback=8))
+        self.data_from_db = context.database.select('apple_data_raw', ['date', 'close'])
+
+        forecast = context.model.forecast(LSTMModel(data=self.data_from_db,forecast_steps=2,lookback=8))
+
+        context.database.upsert('apple_data_raw', forecast)
         pass
 
 if __name__ == '__main__':

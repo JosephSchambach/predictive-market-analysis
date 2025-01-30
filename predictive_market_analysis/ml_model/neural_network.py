@@ -10,7 +10,7 @@ from torch.optim import Adam
 
 class LSTMModel():
     def __init__(self, data=pd.DataFrame, forecast_steps: int = 2, lookback: int = 3, epochs: int = 50):
-        self.data = data if 'date' in data.columns else None
+        self.data = data if 'date' in data.columns and 'close' in data.columns else None
         if self.data is None:
             raise ValueError("Data must have a date column")
         self.forecast_steps = forecast_steps
@@ -20,6 +20,7 @@ class LSTMModel():
 
     def _preprocess_data(self, df: pd.DataFrame):
         try:
+            df['close'] = df['close'].astype(float)
             df['date'] = pd.to_datetime(df['date'])
             df = df.set_index('date')
             close = df.close
@@ -55,34 +56,6 @@ class LSTMModel():
         except Exception as e: 
             raise ValueError(f"An error occurred splitting the data into training and testing sets: {str(e)}")
 
-    def _train(self, dataloader: DataLoader): 
-        epoch_loss = 0
-        self.model.train()
-
-        for batch in dataloader:
-            self.optimizer.zero_grad()
-            x, y = batch
-            pred = self.model(x)
-            loss = self.mse(pred, y)
-            loss.backward()
-            self.optimizer.step()
-            epoch_loss += loss.item()
-
-        return epoch_loss
-    
-    def _evaluate(self, dataloader: DataLoader):
-        epoch_loss = 0
-        self.model.eval()
-
-        with torch.no_grad():
-            for batch in dataloader:
-                x, y = batch
-                pred = self.model(x)
-                loss = self.mse(pred, y)
-                epoch_loss += loss.item()
-        
-        return epoch_loss / len(dataloader)
-    
     def model_train(self): 
         hist = np.zeros(self.epochs)
         for epoch in range(self.epochs):
@@ -115,6 +88,8 @@ class LSTMModel():
             next_dates.append(last_date + BDay(i+1))
         forecast_df = pd.DataFrame({"date": next_dates,"close": forecast})
         new_data = pd.concat([self.data, forecast_df], ignore_index=True)
+        new_data['date'] = new_data['date'].dt.strftime('%Y-%m-%d')
+        new_data['close'] = new_data['close'].round(2)
         return new_data
 
     def run(self): 
