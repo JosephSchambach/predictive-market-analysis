@@ -10,6 +10,8 @@ import json
 context = MarketPredictorContext()
 
 data = context.database.select('apple_data_raw', ['date', 'close'])
+context.dashboard.layout('Apple Stock Price', 'date', 'close', data)
+context.dashboard.run()
 # Plotting the data
 plt.figure(figsize=(10, 5))
 plt.plot(data['date'], data['close'], label='Close Price')
