@@ -2,6 +2,7 @@ from predictive_market_analysis.api.api_config import API
 from predictive_market_analysis.context.logging_context import Logger
 from predictive_market_analysis.database.database_config import Database
 from predictive_market_analysis.ml_model.model_config import MLModelConfig
+from predictive_market_analysis.dashboard.dashboard_config import DashBoard
 import json
 import os
 
@@ -14,6 +15,7 @@ class MarketPredictorContext:
         self._get_api()
         self._get_database()
         self._get_ml_model()
+        self._get_dashboard()
 
     def _get_logger(self): 
         self.logger = Logger()
@@ -43,3 +45,6 @@ class MarketPredictorContext:
 
     def _get_ml_model(self): 
         self.model = MLModelConfig(self)
+
+    def _get_dashboard(self):
+        self.dashboard = DashBoard(self.logger)
