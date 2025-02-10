@@ -1,6 +1,6 @@
 from predictive_market_analysis.context.predictor_context import MarketPredictorContext
 from predictive_market_analysis.models.AlphaVantage import get_function
-import predictive_market_analysis.analysis.technical_indicators as ti
+# import predictive_market_analysis.analysis.technical_indicators as ti
 from matplotlib import pyplot as plt
 from predictive_market_analysis.api import dashboard_api
 import pandas as pd
@@ -8,10 +8,16 @@ import requests
 import json
 
 context = MarketPredictorContext()
+data = context.database.create('msft_intraday', {'id': 'text', 'date': 'date', 'close': 'text'})
 
-data = context.database.select('apple_data_raw', ['date', 'close'])
-context.dashboard.layout('Apple Stock Price', 'date', 'close', data)
-context.dashboard.run()
+# symbol = 'aapl'
+# timeframe = 'weekly'
+# result = context.api.execute('fetch_stock_prices', timeframe=timeframe, symbol=symbol)
+# result = result[['date', 'close']]
+# db = context.database.insert(f'{symbol}_{timeframe}', result)
+
+# context.dashboard.layout('Stock Price Dashboard', subtitle='Interactive Dashboard: Change Stock Symbol and Timeframe')
+# context.dashboard.run()
 # Plotting the data
 plt.figure(figsize=(10, 5))
 plt.plot(data['date'], data['close'], label='Close Price')

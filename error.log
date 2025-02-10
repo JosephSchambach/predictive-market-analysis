@@ -1,3 +1,10 @@
 2025-01-04 15:17:37,191 - custom_logger - CRITICAL - Database action insert failed with error: Object of type Timestamp is not JSON serializable
 2025-01-29 20:52:31,508 - custom_logger - CRITICAL - Database action insert failed with error: {}
 2025-01-29 20:52:31,838 - custom_logger - CRITICAL - Database select action select failed with error: {'code': '42P01', 'details': None, 'hint': None, 'message': 'relation "public.apple_data_raw" does not exist'}
+2025-02-09 14:56:55,210 - custom_logger - ERROR - Error setting up layout: Value of 'x' is not the name of a column in 'data_frame'. Expected one of [] but received: date
+2025-02-09 14:57:17,723 - custom_logger - ERROR - Error setting up layout: Value of 'x' is not the name of a column in 'data_frame'. Expected one of [] but received: date
+2025-02-09 15:05:07,301 - custom_logger - CRITICAL - Database select action select failed with error: {'code': '42P01', 'details': None, 'hint': None, 'message': 'relation "public.msft_daily_raw" does not exist'}
+2025-02-09 15:21:43,856 - custom_logger - CRITICAL - Database action create failed with error: {'code': '42501', 'details': None, 'hint': None, 'message': 'permission denied for schema public'}
+2025-02-09 15:28:32,175 - custom_logger - CRITICAL - Error executing method: fetch_stock_prices with error 'Time Series (5min)'
+2025-02-09 15:32:12,158 - custom_logger - CRITICAL - Error executing method: fetch_stock_prices with error 'Time Series (Daily)'
+2025-02-09 15:38:56,065 - custom_logger - CRITICAL - Database action create failed with error: {'code': '42501', 'details': None, 'hint': None, 'message': 'permission denied for schema public'}

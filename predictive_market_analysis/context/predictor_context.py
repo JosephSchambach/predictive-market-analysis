@@ -47,4 +47,5 @@ class MarketPredictorContext:
         self.model = MLModelConfig(self)
 
     def _get_dashboard(self):
-        self.dashboard = DashBoard(self.logger)
+        self.logger.log('Initializing the dashboard')
+        self.dashboard = DashBoard(self.logger, self.database)

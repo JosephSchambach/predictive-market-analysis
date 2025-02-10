@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 from pandas.tseries.offsets import BDay
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
-import torch
+from torch import from_numpy, Tensor, no_grad, zeros, cuda, device
 from torch import nn
 from torch.utils.data import DataLoader
 from torch.optim import Adam
@@ -49,10 +49,10 @@ class LSTMModel():
             x_valid = sequences[train_set_size:train_set_size+valid_set_size, :-(self.forecast_steps), :]
             y_valid = sequences[train_set_size:train_set_size+valid_set_size, -self.forecast_steps:, :]
 
-            self.x_train = torch.from_numpy(x_train).type(torch.Tensor)
-            self.y_train = torch.from_numpy(y_train).type(torch.Tensor)
-            self.x_valid = torch.from_numpy(x_valid).type(torch.Tensor)
-            self.y_valid = torch.from_numpy(y_valid).type(torch.Tensor)
+            self.x_train = from_numpy(x_train).type(Tensor)
+            self.y_train = from_numpy(y_train).type(Tensor)
+            self.x_valid = from_numpy(x_valid).type(Tensor)
+            self.y_valid = from_numpy(y_valid).type(Tensor)
         except Exception as e: 
             raise ValueError(f"An error occurred splitting the data into training and testing sets: {str(e)}")
 
@@ -75,7 +75,7 @@ class LSTMModel():
         self.model.eval()
         last_sequence = self.x_valid[-1:] 
         
-        with torch.no_grad():
+        with no_grad():
             forecast = self.model(last_sequence)
         
         forecast = self.scaler.inverse_transform(forecast.cpu().numpy())
@@ -100,7 +100,7 @@ class LSTMModel():
             num_layers=2, 
             output_size=self.forecast_steps
         )
-        device = torch.device('cuda' if torch.cuda.is_available() else 'cpu') 
+        device = device('cuda' if cuda.is_available() else 'cpu') 
         self.model = model.to(device)
         self.optimizer = Adam(model.parameters(),lr=0.01)
         self.mse = nn.MSELoss()
@@ -129,8 +129,8 @@ class LSTM(nn.Module):
         self.fc = nn.Linear(hidden_dimensions, output_size)
     
     def forward(self, x): 
-        h0 = torch.zeros(self.num_layers, x.size(0), self.hidden_dim).requires_grad_()
-        c0 = torch.zeros(self.num_layers, x.size(0), self.hidden_dim).requires_grad_()
+        h0 = zeros(self.num_layers, x.size(0), self.hidden_dim).requires_grad_()
+        c0 = zeros(self.num_layers, x.size(0), self.hidden_dim).requires_grad_()
 
         out, (hn, cn) = self.lstm(x, (h0.detach(), c0.detach()))
         out = self.fc(out[:, -1, :]) 
