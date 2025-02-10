@@ -29,7 +29,7 @@ class DashBoard():
                 html.H1(children=title,
                         style={
                         'textAlign': 'center',
-                        'color': self.dashboard_config['text']
+                        'color': self.dashboard_config['text'],
                         'fontFamily': self.dashboard_config['font_family']
                     }),
                 html.Div(children=sub, 

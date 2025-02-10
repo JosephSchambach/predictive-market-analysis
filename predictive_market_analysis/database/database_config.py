@@ -3,7 +3,7 @@ import hashlib
 import pandas as pd
 
 class Database():
-    def __init__(self,database_config, logger):
+    def __init__(self, database_config, logger):
         self._database_url = database_config['supabase']['api_url']
         self._database_key = database_config['supabase']['api_key']
         self._etl_config = database_config['etl'] if 'etl' in database_config else None
@@ -51,6 +51,7 @@ class Database():
                     raise ValueError("Table name cannot be empty.")
                 if data.empty:
                     return
+                data['date'] = data['date'].astype(str)
                 data_with_id = self._handle_id_column(data)
                 rows = self._row_create(data_with_id)
                 self.logger.log(f"Upserting data into table: {table}")
@@ -73,29 +74,37 @@ class Database():
                 self.logger.log(f"Database action create failed with error: {str(e)}", 'CRITICAL')
         return None
 
-    def etl(self, symbol: str, timeframe: str):
+    def etl(self, etlclass):
         if self._etl_config is None:
             self.logger.log('ETL config is not set', 'ERROR')
             return
         try:
-            self.logger.log(f"Running ETL for symbol: {symbol} and timeframe: {timeframe}")
-            response = self.select(f"{symbol}_{timeframe}", ['date', 'close'])
-            if response.empty:
-                self.logger.log(f"No data found for symbol: {symbol} and timeframe: {timeframe}")
-                
+            if etlclass.missing_table:
+                self.logger.log(f"No data found for symbol: {etlclass.symbol} and timeframe: {etlclass.timeframe}")
                 columns = {
                     'id': 'text',
                     'date': 'date', 
                     'close': 'text'
                 }
-                create_res = self.create(f"{symbol}_{timeframe}", columns)
+                create_res = self.create(f"{etlclass.symbol}_{etlclass.timeframe}", columns)
                 if create_res is None:
-                    self.logger.log(f"Table {symbol}_{timeframe} not created successfully")
+                    self.logger.log(f"Table {etlclass.symbol}_{etlclass.timeframe} not created successfully")
                     return
                 else:
-                    self.logger.log(f"Table {symbol}_{timeframe} created successfully")
-                    # need to figure out a way to call the api for data. Maybe this needs to be a paramater. TODO
-            return response
+                    self.logger.log(f"Table {etlclass.symbol}_{etlclass.timeframe} created successfully")
+                    data = etlclass.data
+                    insert_res = self.insert(f"{etlclass.symbol}_{etlclass.timeframe}", data)
+            elif not etlclass.missing_table:
+                data = etlclass.data
+                if data is None:
+                    self.logger.log(f"No data found for symbol: {etlclass.symbol} and timeframe: {etlclass.timeframe}")
+                else:
+                    upsert_res = self.upsert(f"{etlclass.symbol}_{etlclass.timeframe}", data)
+                    if upsert_res is None:
+                        self.logger.log(f"Data not upserted successfully for symbol: {etlclass.symbol} and timeframe: {etlclass.timeframe}")
+                    else:
+                        self.logger.log(f"Data upserted successfully for symbol: {etlclass.symbol} and timeframe: {etlclass.timeframe}")
+
         except Exception as e:
             self.logger.log(f"Database action etl failed with error: {str(e)}", 'CRITICAL')
         return None

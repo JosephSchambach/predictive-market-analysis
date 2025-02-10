@@ -8,3 +8,20 @@
 2025-02-09 15:28:32,175 - custom_logger - CRITICAL - Error executing method: fetch_stock_prices with error 'Time Series (5min)'
 2025-02-09 15:32:12,158 - custom_logger - CRITICAL - Error executing method: fetch_stock_prices with error 'Time Series (Daily)'
 2025-02-09 15:38:56,065 - custom_logger - CRITICAL - Database action create failed with error: {'code': '42501', 'details': None, 'hint': None, 'message': 'permission denied for schema public'}
+2025-02-09 22:04:22,956 - custom_logger - CRITICAL - Database select action select failed with error: {'code': '42P01', 'details': None, 'hint': None, 'message': 'relation "public.AAPL_daily" does not exist'}
+2025-02-09 22:05:28,803 - custom_logger - CRITICAL - Database select action select failed with error: {'code': '42P01', 'details': None, 'hint': None, 'message': 'relation "public.AAPL_daily" does not exist'}
+2025-02-09 22:06:39,510 - custom_logger - CRITICAL - Database select action select failed with error: {'code': '42P01', 'details': None, 'hint': None, 'message': 'relation "public.AAPL_daily" does not exist'}
+2025-02-09 22:08:16,837 - custom_logger - CRITICAL - Database action upsert failed with error: Object of type Timestamp is not JSON serializable
+2025-02-09 22:14:34,205 - custom_logger - CRITICAL - Database select action select failed with error: {'code': '42P01', 'details': None, 'hint': None, 'message': 'relation "public.aapl_weekly" does not exist'}
+2025-02-09 22:15:25,365 - custom_logger - CRITICAL - Database select action select failed with error: {'code': '42P01', 'details': None, 'hint': None, 'message': 'relation "public.aapl_monthly" does not exist'}
+2025-02-09 22:15:47,964 - custom_logger - CRITICAL - Database select action select failed with error: {'code': '42P01', 'details': None, 'hint': None, 'message': 'relation "public.msft_weekly" does not exist'}
+2025-02-09 22:15:58,506 - custom_logger - CRITICAL - Database select action select failed with error: {'code': '42P01', 'details': None, 'hint': None, 'message': 'relation "public.msft_monthly" does not exist'}
+2025-02-09 22:16:03,483 - custom_logger - CRITICAL - Database select action select failed with error: {'code': '42P01', 'details': None, 'hint': None, 'message': 'relation "public.googl_daily" does not exist'}
+2025-02-09 22:16:05,954 - custom_logger - CRITICAL - Database select action select failed with error: {'code': '42P01', 'details': None, 'hint': None, 'message': 'relation "public.googl_weekly" does not exist'}
+2025-02-09 22:16:07,757 - custom_logger - CRITICAL - Database select action select failed with error: {'code': '42P01', 'details': None, 'hint': None, 'message': 'relation "public.googl_monthly" does not exist'}
+2025-02-09 22:16:08,963 - custom_logger - CRITICAL - Database select action select failed with error: {'code': '42P01', 'details': None, 'hint': None, 'message': 'relation "public.amzn_daily" does not exist'}
+2025-02-09 22:16:11,403 - custom_logger - CRITICAL - Database select action select failed with error: {'code': '42P01', 'details': None, 'hint': None, 'message': 'relation "public.amzn_weekly" does not exist'}
+2025-02-09 22:16:13,028 - custom_logger - CRITICAL - Database select action select failed with error: {'code': '42P01', 'details': None, 'hint': None, 'message': 'relation "public.amzn_monthly" does not exist'}
+2025-02-09 22:16:14,153 - custom_logger - CRITICAL - Database select action select failed with error: {'code': '42P01', 'details': None, 'hint': None, 'message': 'relation "public.tsla_daily" does not exist'}
+2025-02-09 22:16:15,710 - custom_logger - CRITICAL - Database select action select failed with error: {'code': '42P01', 'details': None, 'hint': None, 'message': 'relation "public.tsla_weekly" does not exist'}
+2025-02-09 22:16:17,001 - custom_logger - CRITICAL - Database select action select failed with error: {'code': '42P01', 'details': None, 'hint': None, 'message': 'relation "public.tsla_monthly" does not exist'}

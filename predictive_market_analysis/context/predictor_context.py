@@ -12,6 +12,7 @@ class MarketPredictorContext:
         self._get_logger()
         self._get_config()
         self._get_secrets()
+        self._get_etl()
         self._get_api()
         self._get_database()
         self._get_ml_model()
@@ -33,6 +34,13 @@ class MarketPredictorContext:
         for secret in self.config['secrets']:
             for var in self.config['secrets'][secret]: 
                 self.secrets[secret + "_" + var] = self.config['secrets'][secret][var]
+
+    def _get_etl(self):
+        if 'etl' not in self.config['secrets']['database']: return
+        self.etl = self.secrets['database_etl']
+        self.stock_symbols = self.etl['stock_tickers']
+        self.timeframes = self.etl['timeframe']
+        self.data_sources = self.etl['data_sources']
 
     def _get_api(self):
         api_config = self.secrets
