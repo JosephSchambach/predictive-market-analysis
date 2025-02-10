@@ -12,7 +12,8 @@ class DashBoard():
         self.y = 'close'
         self.colors = {
             'background': '#F9F9F9',
-            'text': '#333333'
+            'text': '#333333',
+            'font_family': 'Times New Roman'
         }
         self.database = database
         self.stock = 'aapl'
@@ -28,7 +29,8 @@ class DashBoard():
                 html.H1(children=title,
                         style={
                         'textAlign': 'center',
-                        'color': self.colors['text']
+                        'color': self.dashboard_config['text']
+                        'fontFamily': self.dashboard_config['font_family']
                     }),
                 html.Div(children=sub, 
                         style={
