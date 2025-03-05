@@ -7,6 +7,13 @@ class AlphaVantageAPI:
     def __init__(self, api_config, logger): 
         self.base_url = api_config['alpha_vantage_url'] + api_config['alpha_vantage_api_key']
         self.logger=logger
+        self._col_renames = {
+            '1. open': 'open',
+            '2. high': 'high',
+            '3. low': 'low',
+            '4. close': 'close',
+            '5. volume': 'volume'
+        }
 
     def fetch_stock_prices(self, timeframe, symbol): 
         function_output = get_function(timeframe)
@@ -22,16 +29,10 @@ class AlphaVantageAPI:
         extract_data = json_data[key]
         df = pd.DataFrame.from_dict(extract_data, orient='index')
         df.reset_index(inplace=True)
-        df.rename(columns={'index': 'date',
-                           '1. open': 'open',
-                            '2. high': 'high',
-                            '3. low': 'low',
-                            '4. close': 'close',
-                            '5. volume': 'volume'
-                        }, inplace=True)
+        df.rename(columns=self._col_renames, inplace=True)
         df['date'] = pd.to_datetime(df['date'])
         df['date'] = df['date'].dt.strftime('%Y-%m-%d')
-        for col in ['open', 'high', 'low', 'close', 'volume']:
+        for col in self._col_renames.values():
             df[col] = pd.to_numeric(df[col])
         return df   
     

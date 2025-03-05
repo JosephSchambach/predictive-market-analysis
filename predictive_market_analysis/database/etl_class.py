@@ -9,17 +9,16 @@ class ETLClass():
         self.missing_table = False
         self.data = None
         self._check_database()
+        self._extract_data()
 
     def _check_database(self):
         table_name = f'{self.symbol}_{self.timeframe}'
         response = context.database.select(table_name, ['date', 'close'])
         if response is None:
             self.missing_table = True
-            self._extract_data()
-        elif not response.empty:
-            self.data = response
 
     def _extract_data(self):
-        if self.missing_table:
-            self.data = context.api.execute('fetch_stock_prices', timeframe=self.timeframe, symbol=self.symbol)
-            self.data = self.data[['date', 'close']]
+        self.data = context.api.execute('fetch_stock_prices', timeframe=self.timeframe, symbol=self.symbol)
+        if self.data is None:
+            return
+        self.data = self.data[['date', 'close']]

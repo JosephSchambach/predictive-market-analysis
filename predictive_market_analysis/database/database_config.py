@@ -88,22 +88,22 @@ class Database():
                 }
                 create_res = self.create(f"{etlclass.symbol}_{etlclass.timeframe}", columns)
                 if create_res is None:
-                    self.logger.log(f"Table {etlclass.symbol}_{etlclass.timeframe} not created successfully")
+                    self.logger.log(f"Table {etlclass.symbol}_{etlclass.timeframe} not created successfully\n")
                     return
                 else:
-                    self.logger.log(f"Table {etlclass.symbol}_{etlclass.timeframe} created successfully")
+                    self.logger.log(f"Table {etlclass.symbol}_{etlclass.timeframe} created successfully\n")
                     data = etlclass.data
                     insert_res = self.insert(f"{etlclass.symbol}_{etlclass.timeframe}", data)
             elif not etlclass.missing_table:
                 data = etlclass.data
                 if data is None:
-                    self.logger.log(f"No data found for symbol: {etlclass.symbol} and timeframe: {etlclass.timeframe}")
+                    self.logger.log(f"No data found for symbol: {etlclass.symbol} and timeframe: {etlclass.timeframe}\n")
                 else:
                     upsert_res = self.upsert(f"{etlclass.symbol}_{etlclass.timeframe}", data)
                     if upsert_res is None:
-                        self.logger.log(f"Data not upserted successfully for symbol: {etlclass.symbol} and timeframe: {etlclass.timeframe}")
+                        self.logger.log(f"Data not upserted successfully for symbol: {etlclass.symbol} and timeframe: {etlclass.timeframe}\n")
                     else:
-                        self.logger.log(f"Data upserted successfully for symbol: {etlclass.symbol} and timeframe: {etlclass.timeframe}")
+                        self.logger.log(f"Data upserted successfully for symbol: {etlclass.symbol} and timeframe: {etlclass.timeframe}\n")
 
         except Exception as e:
             self.logger.log(f"Database action etl failed with error: {str(e)}", 'CRITICAL')

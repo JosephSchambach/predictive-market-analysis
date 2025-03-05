@@ -13,6 +13,7 @@ class StockPriceETL():
             for timeframe in self.timeframes:
                 context.database.etl(ETLClass(symbol=symbol.lower(), timeframe=timeframe))
         context.logger.log('ETL process completed')
+        
 if __name__ == '__main__':
     stock = StockPriceETL()
     stock.perform_etl()

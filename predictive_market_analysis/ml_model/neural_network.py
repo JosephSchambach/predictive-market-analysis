@@ -3,13 +3,13 @@ from datetime import datetime, timedelta
 from pandas.tseries.offsets import BDay
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
-from torch import from_numpy, Tensor, no_grad, zeros, cuda, device
+import torch
 from torch import nn
 from torch.utils.data import DataLoader
 from torch.optim import Adam
 
 class LSTMModel():
-    def __init__(self, data=pd.DataFrame, forecast_steps: int = 2, lookback: int = 3, epochs: int = 50):
+    def __init__(self, data=pd.DataFrame, forecast_steps: int = 1, lookback: int = 4, epochs: int = 50):
         self.data = data if 'date' in data.columns and 'close' in data.columns else None
         if self.data is None:
             raise ValueError("Data must have a date column")
@@ -49,10 +49,10 @@ class LSTMModel():
             x_valid = sequences[train_set_size:train_set_size+valid_set_size, :-(self.forecast_steps), :]
             y_valid = sequences[train_set_size:train_set_size+valid_set_size, -self.forecast_steps:, :]
 
-            self.x_train = from_numpy(x_train).type(Tensor)
-            self.y_train = from_numpy(y_train).type(Tensor)
-            self.x_valid = from_numpy(x_valid).type(Tensor)
-            self.y_valid = from_numpy(y_valid).type(Tensor)
+            self.x_train = torch.from_numpy(x_train).type(torch.Tensor)
+            self.y_train = torch.from_numpy(y_train).type(torch.Tensor)
+            self.x_valid = torch.from_numpy(x_valid).type(torch.Tensor)
+            self.y_valid = torch.from_numpy(y_valid).type(torch.Tensor)
         except Exception as e: 
             raise ValueError(f"An error occurred splitting the data into training and testing sets: {str(e)}")
 
@@ -75,7 +75,7 @@ class LSTMModel():
         self.model.eval()
         last_sequence = self.x_valid[-1:] 
         
-        with no_grad():
+        with torch.no_grad():
             forecast = self.model(last_sequence)
         
         forecast = self.scaler.inverse_transform(forecast.cpu().numpy())
@@ -86,7 +86,7 @@ class LSTMModel():
         next_dates = []
         for i in range(self.forecast_steps):
             next_dates.append(last_date + BDay(i+1))
-        forecast_df = pd.DataFrame({"date": next_dates,"close": forecast})
+        forecast_df = pd.DataFrame().from_dict(data={"date": next_dates,"close": forecast}, orient='columns')
         new_data = pd.concat([self.data, forecast_df], ignore_index=True)
         new_data['date'] = new_data['date'].dt.strftime('%Y-%m-%d')
         new_data['close'] = new_data['close'].round(2)
@@ -100,7 +100,7 @@ class LSTMModel():
             num_layers=2, 
             output_size=self.forecast_steps
         )
-        device = device('cuda' if cuda.is_available() else 'cpu') 
+        device = torch.device('cuda' if torch.cuda.is_available() else 'cpu') 
         self.model = model.to(device)
         self.optimizer = Adam(model.parameters(),lr=0.01)
         self.mse = nn.MSELoss()
@@ -108,17 +108,6 @@ class LSTMModel():
         _forecast = self.forecast()
         forecast = self.format_response(_forecast)
         return forecast
-
-class NeuralNetwork(nn.Module):
-    def __init__(self, input_size):
-        super(NeuralNetwork, self).__init__()
-        self.lstm = nn.LSTM(input_size, 64, 2, batch_first=True)
-        self.fc = nn.Linear(64, input_size)
-    
-    def forward(self, x): 
-        output, (hidden, cell) = self.lstm(x)
-        x = self.fc(output)
-        return x
 
 class LSTM(nn.Module): 
     def __init__(self, input_size, hidden_dimensions, num_layers, output_size):
@@ -129,8 +118,8 @@ class LSTM(nn.Module):
         self.fc = nn.Linear(hidden_dimensions, output_size)
     
     def forward(self, x): 
-        h0 = zeros(self.num_layers, x.size(0), self.hidden_dim).requires_grad_()
-        c0 = zeros(self.num_layers, x.size(0), self.hidden_dim).requires_grad_()
+        h0 = torch.zeros(self.num_layers, x.size(0), self.hidden_dim).requires_grad_()
+        c0 = torch.zeros(self.num_layers, x.size(0), self.hidden_dim).requires_grad_()
 
         out, (hn, cn) = self.lstm(x, (h0.detach(), c0.detach()))
         out = self.fc(out[:, -1, :]) 

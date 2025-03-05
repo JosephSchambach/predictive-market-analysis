@@ -25,3 +25,57 @@
 2025-02-09 22:16:14,153 - custom_logger - CRITICAL - Database select action select failed with error: {'code': '42P01', 'details': None, 'hint': None, 'message': 'relation "public.tsla_daily" does not exist'}
 2025-02-09 22:16:15,710 - custom_logger - CRITICAL - Database select action select failed with error: {'code': '42P01', 'details': None, 'hint': None, 'message': 'relation "public.tsla_weekly" does not exist'}
 2025-02-09 22:16:17,001 - custom_logger - CRITICAL - Database select action select failed with error: {'code': '42P01', 'details': None, 'hint': None, 'message': 'relation "public.tsla_monthly" does not exist'}
+2025-02-15 14:56:57,012 - custom_logger - ERROR - Error setting up layout: 'DashBoard' object has no attribute 'dashboard_config'
+2025-02-27 06:37:47,609 - custom_logger - CRITICAL - Database select action select failed with error: [Errno 11001] getaddrinfo failed
+2025-02-27 06:37:49,857 - custom_logger - CRITICAL - Database select action select failed with error: [Errno 11001] getaddrinfo failed
+2025-02-27 06:39:17,835 - custom_logger - CRITICAL - Database select action select failed with error: [Errno 11001] getaddrinfo failed
+2025-02-27 06:39:20,475 - custom_logger - CRITICAL - Database action create failed with error: [Errno 11001] getaddrinfo failed
+2025-02-27 06:39:20,506 - custom_logger - CRITICAL - Database select action select failed with error: [Errno 11001] getaddrinfo failed
+2025-02-27 06:39:21,325 - custom_logger - CRITICAL - Database action create failed with error: [Errno 11001] getaddrinfo failed
+2025-02-27 06:39:21,325 - custom_logger - CRITICAL - Database select action select failed with error: [Errno 11001] getaddrinfo failed
+2025-02-27 06:39:21,933 - custom_logger - CRITICAL - Database action create failed with error: [Errno 11001] getaddrinfo failed
+2025-02-27 06:39:21,933 - custom_logger - CRITICAL - Database select action select failed with error: [Errno 11001] getaddrinfo failed
+2025-02-27 06:39:22,563 - custom_logger - CRITICAL - Database action create failed with error: [Errno 11001] getaddrinfo failed
+2025-02-27 06:39:22,563 - custom_logger - CRITICAL - Database select action select failed with error: [Errno 11001] getaddrinfo failed
+2025-02-27 06:39:23,230 - custom_logger - CRITICAL - Database action create failed with error: [Errno 11001] getaddrinfo failed
+2025-02-27 06:39:23,236 - custom_logger - CRITICAL - Database select action select failed with error: [Errno 11001] getaddrinfo failed
+2025-02-27 06:39:23,736 - custom_logger - CRITICAL - Database action create failed with error: [Errno 11001] getaddrinfo failed
+2025-02-27 06:39:23,736 - custom_logger - CRITICAL - Database select action select failed with error: [Errno 11001] getaddrinfo failed
+2025-02-27 06:39:24,676 - custom_logger - CRITICAL - Database action create failed with error: [Errno 11001] getaddrinfo failed
+2025-02-27 06:39:24,693 - custom_logger - CRITICAL - Database select action select failed with error: [Errno 11001] getaddrinfo failed
+2025-02-27 06:39:25,283 - custom_logger - CRITICAL - Database action create failed with error: [Errno 11001] getaddrinfo failed
+2025-02-27 06:39:25,283 - custom_logger - CRITICAL - Database select action select failed with error: [Errno 11001] getaddrinfo failed
+2025-02-27 06:39:25,791 - custom_logger - CRITICAL - Database action create failed with error: [Errno 11001] getaddrinfo failed
+2025-02-27 06:39:25,792 - custom_logger - CRITICAL - Database select action select failed with error: [Errno 11001] getaddrinfo failed
+2025-02-27 06:39:26,658 - custom_logger - CRITICAL - Database action create failed with error: [Errno 11001] getaddrinfo failed
+2025-02-27 06:39:26,658 - custom_logger - CRITICAL - Database select action select failed with error: [Errno 11001] getaddrinfo failed
+2025-02-27 06:39:27,260 - custom_logger - CRITICAL - Database action create failed with error: [Errno 11001] getaddrinfo failed
+2025-02-27 06:39:27,264 - custom_logger - CRITICAL - Database select action select failed with error: [Errno 11001] getaddrinfo failed
+2025-02-27 06:39:27,818 - custom_logger - CRITICAL - Database action create failed with error: [Errno 11001] getaddrinfo failed
+2025-02-27 06:39:27,826 - custom_logger - CRITICAL - Database select action select failed with error: [Errno 11001] getaddrinfo failed
+2025-02-27 06:39:28,464 - custom_logger - CRITICAL - Database action create failed with error: [Errno 11001] getaddrinfo failed
+2025-02-27 06:39:28,471 - custom_logger - CRITICAL - Database select action select failed with error: [Errno 11001] getaddrinfo failed
+2025-02-27 06:39:29,083 - custom_logger - CRITICAL - Database action create failed with error: [Errno 11001] getaddrinfo failed
+2025-02-27 06:39:29,083 - custom_logger - CRITICAL - Database select action select failed with error: [Errno 11001] getaddrinfo failed
+2025-02-27 06:39:29,601 - custom_logger - CRITICAL - Database action create failed with error: [Errno 11001] getaddrinfo failed
+2025-02-27 06:41:07,394 - custom_logger - CRITICAL - Database select action select failed with error: {'code': 'PGRST002', 'details': None, 'hint': None, 'message': 'Could not query the database for the schema cache. Retrying.'}
+2025-02-27 06:43:56,470 - custom_logger - CRITICAL - Error executing method: fetch_stock_prices with error 'Monthly Time Series'
+2025-02-27 06:45:55,541 - custom_logger - CRITICAL - Error executing method: fetch_stock_prices with error 'Time Series (Daily)'
+2025-02-27 06:45:56,243 - custom_logger - CRITICAL - Error executing method: fetch_stock_prices with error 'Weekly Time Series'
+2025-02-27 06:45:57,171 - custom_logger - CRITICAL - Error executing method: fetch_stock_prices with error 'Monthly Time Series'
+2025-02-27 06:45:58,309 - custom_logger - CRITICAL - Error executing method: fetch_stock_prices with error 'Time Series (Daily)'
+2025-02-27 06:45:59,324 - custom_logger - CRITICAL - Error executing method: fetch_stock_prices with error 'Weekly Time Series'
+2025-02-27 06:46:00,359 - custom_logger - CRITICAL - Error executing method: fetch_stock_prices with error 'Monthly Time Series'
+2025-02-27 06:46:01,780 - custom_logger - CRITICAL - Error executing method: fetch_stock_prices with error 'Time Series (Daily)'
+2025-02-27 06:46:05,888 - custom_logger - CRITICAL - Error executing method: fetch_stock_prices with error 'Weekly Time Series'
+2025-02-27 06:46:06,798 - custom_logger - CRITICAL - Error executing method: fetch_stock_prices with error 'Monthly Time Series'
+2025-02-27 06:46:07,839 - custom_logger - CRITICAL - Error executing method: fetch_stock_prices with error 'Time Series (Daily)'
+2025-02-27 06:46:08,657 - custom_logger - CRITICAL - Error executing method: fetch_stock_prices with error 'Weekly Time Series'
+2025-02-27 06:46:09,473 - custom_logger - CRITICAL - Error executing method: fetch_stock_prices with error 'Monthly Time Series'
+2025-02-27 06:46:10,286 - custom_logger - CRITICAL - Error executing method: fetch_stock_prices with error 'Time Series (Daily)'
+2025-02-27 06:46:11,415 - custom_logger - CRITICAL - Error executing method: fetch_stock_prices with error 'Weekly Time Series'
+2025-02-27 06:46:12,435 - custom_logger - CRITICAL - Error executing method: fetch_stock_prices with error 'Monthly Time Series'
+2025-03-05 06:28:23,776 - custom_logger - CRITICAL - Database select action select failed with error: {'code': '42P01', 'details': None, 'hint': None, 'message': 'relation "public.AAPL_daily" does not exist'}
+2025-03-05 06:28:24,424 - custom_logger - CRITICAL - Error executing method: fetch_stock_prices with error 'date'
+2025-03-05 06:28:24,590 - custom_logger - CRITICAL - Database action insert failed with error: 'NoneType' object has no attribute 'empty'
+2025-03-05 06:28:24,713 - custom_logger - ERROR - Error setting up layout: Value of 'x' is not the name of a column in 'data_frame'. Expected one of [] but received: date
