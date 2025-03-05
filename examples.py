@@ -1,15 +1,17 @@
 from predictive_market_analysis.context.predictor_context import MarketPredictorContext
 from predictive_market_analysis.models.AlphaVantage import get_function
-import predictive_market_analysis.analysis.technical_indicators as ti
 from matplotlib import pyplot as plt
 from predictive_market_analysis.api import dashboard_api
 import pandas as pd
 import requests 
 import json
+from predictive_market_analysis.database.etl_class import ETLClass
 
 context = MarketPredictorContext()
 
-data = context.database.select('apple_data_raw', ['date', 'close'])
+context.database.etl(ETLClass('AAPL', 'daily'))
+context.dashboard.layout('Stock Price Dashboard', subtitle='Interactive Dashboard: Change Stock Symbol and Timeframe and select Machine Learning Forecast parameters if desired')
+context.dashboard.run()
 # Plotting the data
 plt.figure(figsize=(10, 5))
 plt.plot(data['date'], data['close'], label='Close Price')

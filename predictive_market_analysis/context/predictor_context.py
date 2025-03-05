@@ -2,6 +2,7 @@ from predictive_market_analysis.api.api_config import API
 from predictive_market_analysis.context.logging_context import Logger
 from predictive_market_analysis.database.database_config import Database
 from predictive_market_analysis.ml_model.model_config import MLModelConfig
+from predictive_market_analysis.dashboard.dashboard_config import DashBoard
 import json
 import os
 
@@ -11,9 +12,11 @@ class MarketPredictorContext:
         self._get_logger()
         self._get_config()
         self._get_secrets()
+        self._get_etl()
         self._get_api()
         self._get_database()
         self._get_ml_model()
+        self._get_dashboard()
 
     def _get_logger(self): 
         self.logger = Logger()
@@ -32,6 +35,13 @@ class MarketPredictorContext:
             for var in self.config['secrets'][secret]: 
                 self.secrets[secret + "_" + var] = self.config['secrets'][secret][var]
 
+    def _get_etl(self):
+        if 'etl' not in self.config['secrets']['database']: return
+        self.etl = self.secrets['database_etl']
+        self.stock_symbols = self.etl['stock_tickers']
+        self.timeframes = self.etl['timeframe']
+        self.data_sources = self.etl['data_sources']
+
     def _get_api(self):
         api_config = self.secrets
         config = self.config['secrets']
@@ -43,3 +53,7 @@ class MarketPredictorContext:
 
     def _get_ml_model(self): 
         self.model = MLModelConfig(self)
+
+    def _get_dashboard(self):
+        self.logger.log('Initializing the dashboard')
+        self.dashboard = DashBoard(self.logger, self.database, self.model)

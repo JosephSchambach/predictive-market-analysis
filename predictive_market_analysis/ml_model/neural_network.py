@@ -9,7 +9,7 @@ from torch.utils.data import DataLoader
 from torch.optim import Adam
 
 class LSTMModel():
-    def __init__(self, data=pd.DataFrame, forecast_steps: int = 2, lookback: int = 3, epochs: int = 50):
+    def __init__(self, data=pd.DataFrame, forecast_steps: int = 1, lookback: int = 4, epochs: int = 50):
         self.data = data if 'date' in data.columns and 'close' in data.columns else None
         if self.data is None:
             raise ValueError("Data must have a date column")
@@ -86,7 +86,7 @@ class LSTMModel():
         next_dates = []
         for i in range(self.forecast_steps):
             next_dates.append(last_date + BDay(i+1))
-        forecast_df = pd.DataFrame({"date": next_dates,"close": forecast})
+        forecast_df = pd.DataFrame().from_dict(data={"date": next_dates,"close": forecast}, orient='columns')
         new_data = pd.concat([self.data, forecast_df], ignore_index=True)
         new_data['date'] = new_data['date'].dt.strftime('%Y-%m-%d')
         new_data['close'] = new_data['close'].round(2)
@@ -108,17 +108,6 @@ class LSTMModel():
         _forecast = self.forecast()
         forecast = self.format_response(_forecast)
         return forecast
-
-class NeuralNetwork(nn.Module):
-    def __init__(self, input_size):
-        super(NeuralNetwork, self).__init__()
-        self.lstm = nn.LSTM(input_size, 64, 2, batch_first=True)
-        self.fc = nn.Linear(64, input_size)
-    
-    def forward(self, x): 
-        output, (hidden, cell) = self.lstm(x)
-        x = self.fc(output)
-        return x
 
 class LSTM(nn.Module): 
     def __init__(self, input_size, hidden_dimensions, num_layers, output_size):

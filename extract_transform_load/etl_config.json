@@ -1,0 +1,5 @@
+{
+    "stock_tickers": ["AAPL", "MSFT", "GOOGL", "AMZN", "TSLA"],
+    "data_sources": ["AlphaVantage"],
+    "timeframe": ["daily", "weekly", "monthly"]
+}
