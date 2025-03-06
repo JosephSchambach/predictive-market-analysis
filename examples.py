@@ -9,7 +9,7 @@ from predictive_market_analysis.database.etl_class import ETLClass
 
 context = MarketPredictorContext()
 
-context.database.etl(ETLClass('AAPL', 'daily'))
+context.database.etl(ETLClass('aapl', 'daily'))
 context.dashboard.layout('Stock Price Dashboard', subtitle='Interactive Dashboard: Change Stock Symbol and Timeframe and select Machine Learning Forecast parameters if desired')
 context.dashboard.run()
 # Plotting the data

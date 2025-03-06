@@ -80,9 +80,7 @@ class Database():
             return
         try:
             if etlclass.missing_table:
-                self.logger.log(f"No data found for symbol: {etlclass.symbol} and timeframe: {etlclass.timeframe}")
                 columns = {
-                    'id': 'text',
                     'date': 'date', 
                     'close': 'text'
                 }
