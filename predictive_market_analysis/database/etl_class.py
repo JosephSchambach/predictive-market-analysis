@@ -12,10 +12,12 @@ class ETLClass():
         self._extract_data()
 
     def _check_database(self):
+        context.logger.log(f"Starting ETL process for {self.timeframe} {self.symbol} data")
         table_name = f'{self.symbol}_{self.timeframe}'
         response = context.database.select(table_name, ['date', 'close'])
         if response is None:
             self.missing_table = True
+            context.logger.log(f"No data found for symbol: {self.symbol} and timeframe: {self.timeframe}")
 
     def _extract_data(self):
         self.data = context.api.execute('fetch_stock_prices', timeframe=self.timeframe, symbol=self.symbol)

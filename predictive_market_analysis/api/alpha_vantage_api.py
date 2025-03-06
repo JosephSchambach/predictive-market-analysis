@@ -30,7 +30,7 @@ class AlphaVantageAPI:
         df = pd.DataFrame.from_dict(extract_data, orient='index')
         df.reset_index(inplace=True)
         df.rename(columns=self._col_renames, inplace=True)
-        df['date'] = pd.to_datetime(df['date'])
+        df['date'] = pd.to_datetime(df['index'])
         df['date'] = df['date'].dt.strftime('%Y-%m-%d')
         for col in self._col_renames.values():
             df[col] = pd.to_numeric(df[col])

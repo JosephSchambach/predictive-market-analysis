@@ -79,3 +79,24 @@
 2025-03-05 06:28:24,424 - custom_logger - CRITICAL - Error executing method: fetch_stock_prices with error 'date'
 2025-03-05 06:28:24,590 - custom_logger - CRITICAL - Database action insert failed with error: 'NoneType' object has no attribute 'empty'
 2025-03-05 06:28:24,713 - custom_logger - ERROR - Error setting up layout: Value of 'x' is not the name of a column in 'data_frame'. Expected one of [] but received: date
+2025-03-06 06:32:57,751 - custom_logger - CRITICAL - Database select action select failed with error: {'code': '42P01', 'details': None, 'hint': None, 'message': 'relation "public.aapl_daily" does not exist'}
+2025-03-06 06:32:58,899 - custom_logger - CRITICAL - Database select action select failed with error: {'code': '42P01', 'details': None, 'hint': None, 'message': 'relation "public.aapl_daily" does not exist'}
+2025-03-06 06:33:33,224 - custom_logger - CRITICAL - Database select action select failed with error: {'code': '42P01', 'details': None, 'hint': None, 'message': 'relation "public.aapl_daily" does not exist'}
+2025-03-06 06:33:45,512 - custom_logger - CRITICAL - Error executing method: fetch_stock_prices with error 'date'
+2025-03-06 06:34:20,732 - custom_logger - CRITICAL - Database select action select failed with error: {'code': '42P01', 'details': None, 'hint': None, 'message': 'relation "public.aapl_daily" does not exist'}
+2025-03-06 06:34:21,770 - custom_logger - CRITICAL - Database select action select failed with error: {'code': '42P01', 'details': None, 'hint': None, 'message': 'relation "public.aapl_daily" does not exist'}
+2025-03-06 06:34:27,293 - custom_logger - CRITICAL - Database select action select failed with error: {'code': '42P01', 'details': None, 'hint': None, 'message': 'relation "public.aapl_daily" does not exist'}
+2025-03-06 06:36:52,190 - custom_logger - CRITICAL - Database select action select failed with error: {'code': '42P01', 'details': None, 'hint': None, 'message': 'relation "public.aapl_daily" does not exist'}
+2025-03-06 06:36:53,205 - custom_logger - CRITICAL - Database select action select failed with error: {'code': '42P01', 'details': None, 'hint': None, 'message': 'relation "public.aapl_daily" does not exist'}
+2025-03-06 06:36:56,868 - custom_logger - CRITICAL - Database select action select failed with error: {'code': '42P01', 'details': None, 'hint': None, 'message': 'relation "public.aapl_daily" does not exist'}
+2025-03-06 06:39:56,757 - custom_logger - ERROR - Error setting up layout: String or int arguments are only possible when a DataFrame or an array is provided in the `data_frame` argument. No DataFrame was provided, but argument 'x' is of type str or int.
+2025-03-06 06:59:44,273 - custom_logger - CRITICAL - Database select action select failed with error: {'code': '42P01', 'details': None, 'hint': None, 'message': 'relation "public.aapl_daily" does not exist'}
+2025-03-06 06:59:45,546 - custom_logger - CRITICAL - Database select action select failed with error: {'code': '42P01', 'details': None, 'hint': None, 'message': 'relation "public.aapl_daily" does not exist'}
+2025-03-06 07:00:18,880 - custom_logger - CRITICAL - Database select action select failed with error: {'code': '42P01', 'details': None, 'hint': None, 'message': 'relation "public.aapl_daily" does not exist'}
+2025-03-06 07:00:56,966 - custom_logger - CRITICAL - Database select action select failed with error: {'code': '42P01', 'details': None, 'hint': None, 'message': 'relation "public.aapl_daily" does not exist'}
+2025-03-06 07:00:59,105 - custom_logger - CRITICAL - Database select action select failed with error: {'code': '42P01', 'details': None, 'hint': None, 'message': 'relation "public.aapl_daily" does not exist'}
+2025-03-06 07:01:13,187 - custom_logger - CRITICAL - Database select action select failed with error: {'code': '42P01', 'details': None, 'hint': None, 'message': 'relation "public.aapl_daily" does not exist'}
+2025-03-06 07:01:21,718 - custom_logger - CRITICAL - Database action create failed with error: {'code': '42701', 'details': None, 'hint': None, 'message': 'column "id" specified more than once'}
+2025-03-06 07:02:37,606 - custom_logger - CRITICAL - Database select action select failed with error: {'code': '42P01', 'details': None, 'hint': None, 'message': 'relation "public.aapl_daily" does not exist'}
+2025-03-06 07:02:38,677 - custom_logger - CRITICAL - Database select action select failed with error: {'code': '42P01', 'details': None, 'hint': None, 'message': 'relation "public.aapl_daily" does not exist'}
+2025-03-06 07:02:41,844 - custom_logger - CRITICAL - Database select action select failed with error: {'code': '42P01', 'details': None, 'hint': None, 'message': 'relation "public.aapl_daily" does not exist'}
