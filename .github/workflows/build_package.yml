@@ -4,14 +4,13 @@ on:
     push:
         branches:
             - main
-    pull_request:
-        branches:
-            - main
+        paths:
+            - 'setup.py'
+    workflow_dispatch:
 
 jobs:
     build:
         runs-on: ubuntu-latest
-
         steps:
             - name: Checkout Repository
               uses: actions/checkout@v2
@@ -19,22 +18,52 @@ jobs:
             - name: Set up Python
               uses: actions/setup-python@v2
               with:
-                  python-version: 3.12
+                  python-version: '3.x'
 
             - name: Install Dependencies
               run: |
                   python -m pip install --upgrade pip
-                  pip install -r requirements.txt
-                  pip install build twine
+                  pip install setuptools wheel
 
-            - name: Build Package
-              run: python -m build
+            - name: Extract version from setup.py
+              id: get_version
+              run: |
+                  VERSION=$(python setup.py --version)
+                  echo "VERSION=$VERSION" >> $GITHUB_ENV
 
-            - name: Debug Dist Directory
-              run: ls -l dist/
+            - name: Build package
+              run: |
+                  python setup.py sdist
+                  echo "FILE_NAME=predictive_market_analysis-${{ env.VERSION }}.tar.gz" >> $GITHUB_ENV
 
-            - name: Upload package artifact
-              uses: actions/upload-pages-artifact@v3
+            - name: Check if tag exists
+              id: check_tag
+              run: |
+                  if git rev-parse "v${{ env.VERSION }}" >/dev/null 2>&1; then
+                      echo "TAG_EXISTS=true" >> $GITHUB_ENV
+                  else
+                      echo "TAG_EXISTS=false" >> $GITHUB_ENV
+                  fi
+
+            - name: Create Release
+              if: env.TAG_EXISTS == 'false'
+              id: create_release
+              uses: actions/create-release@v1
+              env:
+                  GITHUB_TOKEN: ${{ secrets.PAT }}
               with:
-                  name: python-package
-                  path: dist/*
+                  tag_name: v${{ env.VERSION }}
+                  release_name: Release v${{ env.VERSION }}
+                  draft: false
+                  prerelease: false
+
+            - name: Upload Release Asset
+              if: env.TAG_EXISTS == 'false'
+              uses: actions/upload-release-asset@v1
+              env:
+                  GITHUB_TOKEN: ${{ secrets.PAT }}
+              with:
+                  upload_url: ${{ steps.create_release.outputs.upload_url }}
+                  asset_path: dist/predictive_market_analysis-${{ env.VERSION }}.tar.gz
+                  asset_name: predictive_market_analysis-${{ env.VERSION }}.tar.gz
+                  asset_content_type: application/gzip
