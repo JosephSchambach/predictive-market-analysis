@@ -1,5 +1,7 @@
 *.pyc
-
+*.tar.gz
+dist/*
+*.csvs
 config.json
 
 data/result.csv
