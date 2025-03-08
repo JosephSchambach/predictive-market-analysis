@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="predictive_market_analysis",
+    name="predictive_ma",
     version="0.0.4",
     packages=find_packages(where='predictive_ma'),
     package_dir={'': 'predictive_ma'},
