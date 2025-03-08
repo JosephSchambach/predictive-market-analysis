@@ -1,9 +1,0 @@
-dash
-plotly
-pandas
-matplotlib
-requests
-pandas_ta
-torch
-supabase
-scikit-learn
