@@ -1,4 +1,4 @@
-from predictive_market_analysis.ml_model.neural_network import LSTMModel
+from predictive_ma.ml_model.neural_network import LSTMModel
 
 class MLModelConfig():
     def __init__(self, context): 

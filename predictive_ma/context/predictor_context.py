@@ -1,8 +1,8 @@
-from predictive_market_analysis.api.api_config import API
-from predictive_market_analysis.context.logging_context import Logger
-from predictive_market_analysis.database.database_config import Database
-from predictive_market_analysis.ml_model.model_config import MLModelConfig
-from predictive_market_analysis.dashboard.dashboard_config import DashBoard
+from predictive_ma.api.api_config import API
+from predictive_ma.context.logging_context import Logger
+from predictive_ma.database.database_config import Database
+from predictive_ma.ml_model.model_config import MLModelConfig
+from predictive_ma.dashboard.dashboard_config import DashBoard
 import json
 import os
 

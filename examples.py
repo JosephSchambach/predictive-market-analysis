@@ -1,11 +1,11 @@
-from predictive_market_analysis.context.predictor_context import MarketPredictorContext
-from predictive_market_analysis.models.AlphaVantage import get_function
+from predictive_ma.context.predictor_context import MarketPredictorContext
+from predictive_ma.models.AlphaVantage import get_function
 from matplotlib import pyplot as plt
-from predictive_market_analysis.api import dashboard_api
+from predictive_ma.api import dashboard_api
 import pandas as pd
 import requests 
 import json
-from predictive_market_analysis.database.etl_class import ETLClass
+from predictive_ma.database.etl_class import ETLClass
 
 context = MarketPredictorContext()
 

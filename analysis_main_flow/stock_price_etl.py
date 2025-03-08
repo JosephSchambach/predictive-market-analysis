@@ -1,5 +1,5 @@
-from predictive_market_analysis.context.predictor_context import MarketPredictorContext
-from predictive_market_analysis.database.etl_class import ETLClass
+from predictive_ma.context.predictor_context import MarketPredictorContext
+from predictive_ma.database.etl_class import ETLClass
 
 context = MarketPredictorContext()
 
