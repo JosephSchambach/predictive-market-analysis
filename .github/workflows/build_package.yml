@@ -1,4 +1,4 @@
-name: Built and Publish Predictive Market Analysis Package
+name: Build and Publish Predictive Market Analysis Package
 
 on: 
     push:
@@ -13,25 +13,28 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            -   name: Checkout Repository
-                uses: actions/checkout@v2
+            - name: Checkout Repository
+              uses: actions/checkout@v2
 
-            -   name: Set up Python
-                uses: actions/setup-python@v2
-                with:
-                    python-version: 3.12
+            - name: Set up Python
+              uses: actions/setup-python@v2
+              with:
+                  python-version: 3.12
 
-            -   name: Install Dependencies
-                run: |
-                    python -m pip install --upgrade pip
-                    pip install -r requirements.txt
+            - name: Install Dependencies
+              run: |
+                  python -m pip install --upgrade pip
+                  pip install -r requirements.txt
+                  pip install build twine
 
-            -   name: Build Package
-                run: python setup.py sdist bdist_wheel
+            - name: Build Package
+              run: python -m build
 
-            -   name: Upload package artifact
-                uses: actions/upload-pages-artifact@v3
-                with:
-                    name: python-package
-                    path: dist/*.whl
+            - name: Debug Dist Directory
+              run: ls -l dist/
 
+            - name: Upload package artifact
+              uses: actions/upload-artifact@v3
+              with:
+                  name: python-package
+                  path: dist/*
