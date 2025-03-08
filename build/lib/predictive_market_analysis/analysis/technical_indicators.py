@@ -1,4 +1,4 @@
-from predictive_market_analysis.context.predictor_context import MarketPredictorContext
+from predictive_ma.context.predictor_context import MarketPredictorContext
 import pandas as pd
 import pandas_ta as ta
 import matplotlib.pyplot as plt

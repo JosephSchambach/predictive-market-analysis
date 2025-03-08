@@ -1,7 +1,7 @@
-from predictive_market_analysis.context.predictor_context import MarketPredictorContext
-from predictive_market_analysis.database.database_config import *
-from predictive_market_analysis.analysis.technical_indicators import moving_average
-from predictive_market_analysis.ml_model.neural_network import LSTMModel
+from predictive_ma.context.predictor_context import MarketPredictorContext
+from predictive_ma.database.database_config import *
+from predictive_ma.analysis.technical_indicators import moving_average
+from predictive_ma.ml_model.neural_network import LSTMModel
 import pandas as pd
 
 context = MarketPredictorContext()
