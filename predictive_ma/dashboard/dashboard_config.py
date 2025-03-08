@@ -1,8 +1,8 @@
 from dash import Dash, html, dcc, Input, Output, State
-from predictive_market_analysis.dashboard.callback_classes import StockDropDown, TimeFrameDropDown, MLModelSelect
-from predictive_market_analysis.database.database_config import Database
-from predictive_market_analysis.ml_model.model_config import MLModelConfig
-from predictive_market_analysis.ml_model.neural_network import LSTMModel
+from predictive_ma.dashboard.callback_classes import StockDropDown, TimeFrameDropDown, MLModelSelect
+from predictive_ma.database.database_config import Database
+from predictive_ma.ml_model.model_config import MLModelConfig
+from predictive_ma.ml_model.neural_network import LSTMModel
 import plotly.express as px
 import pandas as pd
 

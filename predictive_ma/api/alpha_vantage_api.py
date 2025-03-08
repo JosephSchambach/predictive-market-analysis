@@ -1,7 +1,7 @@
 import requests
 import json
 import pandas as pd
-from predictive_market_analysis.models.AlphaVantage import get_function
+from predictive_ma.models.AlphaVantage import get_function
 
 class AlphaVantageAPI: 
     def __init__(self, api_config, logger): 

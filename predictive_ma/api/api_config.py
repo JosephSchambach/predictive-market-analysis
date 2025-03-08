@@ -1,5 +1,5 @@
-from predictive_market_analysis.api.alpha_vantage_api import AlphaVantageAPI
-from predictive_market_analysis.api.dashboard_api import DashboardAPI
+from predictive_ma.api.alpha_vantage_api import AlphaVantageAPI
+from predictive_ma.api.dashboard_api import DashboardAPI
 import pandas as pd
 import requests 
 import os
