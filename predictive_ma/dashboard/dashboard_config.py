@@ -66,7 +66,8 @@ class DashBoard():
                         style={
                             'display': 'flex',
                             'flexDirection': 'column', 
-                            'alignItems': 'center'
+                            'alignItems': 'flex-start',
+                            'marginRight': '50px'
                         }),
                         html.Div([
                             dcc.Dropdown(
@@ -91,16 +92,16 @@ class DashBoard():
                         ],
                         style={
                             'display': 'flex',
-                            'alignItems': 'center',
-                            'marginLeft': 'auto',
+                            'alignItems': 'flex-start',
                             'flexDirection': 'column'
                         })
                     ],
                     style={
                         'display': 'flex',
-                        'justifyContent': 'space-between',
-                        'width': '80%',
-                        'margin': 'auto' 
+                        'justifyContent': 'center',
+                        'alignItems': 'center',
+                        'gap': '50px',
+                        'marginBottom': '20px'
                     }
                 ),
                 dcc.Graph(
