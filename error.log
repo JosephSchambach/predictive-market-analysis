@@ -114,3 +114,4 @@
 2025-03-06 07:14:37,839 - custom_logger - CRITICAL - Database select action select failed with error: {'code': '42P01', 'details': None, 'hint': None, 'message': 'relation "public.tsla_daily" does not exist'}
 2025-03-06 07:14:40,182 - custom_logger - CRITICAL - Database select action select failed with error: {'code': '42P01', 'details': None, 'hint': None, 'message': 'relation "public.tsla_weekly" does not exist'}
 2025-03-06 07:14:41,480 - custom_logger - CRITICAL - Database select action select failed with error: {'code': '42P01', 'details': None, 'hint': None, 'message': 'relation "public.tsla_monthly" does not exist'}
+2025-03-12 06:48:30,184 - custom_logger - ERROR - An error occurred processing the model: An error occurred forecasting the data: bad operand type for unary -: 'method'

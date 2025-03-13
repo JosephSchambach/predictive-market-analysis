@@ -1,4 +1,5 @@
 from predictive_ma.context.predictor_context import MarketPredictorContext
+from predictive_ma.ml_model.naive_forecast import NaiveForecast
 from predictive_ma.models.AlphaVantage import get_function
 from matplotlib import pyplot as plt
 from predictive_ma.api import dashboard_api
@@ -8,8 +9,9 @@ import json
 from predictive_ma.database.etl_class import ETLClass
 
 context = MarketPredictorContext()
+data = context.database.select('aapl_daily', ['date', 'close'])
+forecast = context.model.forecast(NaiveForecast(data, 5))
 
-context.database.etl(ETLClass('aapl', 'daily'))
 context.dashboard.layout('Stock Price Dashboard', subtitle='Interactive Dashboard: Change Stock Symbol and Timeframe and select Machine Learning Forecast parameters if desired')
 context.dashboard.run()
 # Plotting the data
