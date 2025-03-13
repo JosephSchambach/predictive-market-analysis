@@ -1,15 +1,13 @@
 import pandas as pd
-from datetime import datetime, timedelta
 from pandas.tseries.offsets import BDay
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
 import torch
 from torch import nn
-from torch.utils.data import DataLoader
 from torch.optim import Adam
 
 class LSTMModel():
-    def __init__(self, data=pd.DataFrame, forecast_steps: int = 1, lookback: int = 4, epochs: int = 50):
+    def __init__(self, data, forecast_steps: int, lookback: int, epochs: int = 50):
         self.data = data if 'date' in data.columns and 'close' in data.columns else None
         if self.data is None:
             raise ValueError("Data must have a date column")
@@ -95,7 +93,7 @@ class LSTMModel():
     def run(self): 
         self.train_test_split(self.sequences)
         model = LSTM(
-            input_size=1,  
+            input_size=self.lookback,  
             hidden_dimensions=64, 
             num_layers=2, 
             output_size=self.forecast_steps
