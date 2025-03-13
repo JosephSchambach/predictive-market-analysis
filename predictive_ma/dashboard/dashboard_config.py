@@ -126,7 +126,7 @@ class DashBoard():
             if isinstance(ml_model, MLModelSelect) and not ml_model.no_model:
                 if ml_model.model[0] == 'Long-Short-Term-Memory':
                     self.logger.log('Running LSTM model')
-                    self.default_data = self.model.forecast(LSTMModel(self.default_data, ml_model.lookback, ml_model.forecast))
+                    self.default_data = self.model.forecast(LSTMModel(data=self.default_data, forecast_steps=ml_model.forecast, lookback=ml_model.lookback))
         except Exception as e:
             raise ValueError(f"Invalid callback model: {e}")
 
