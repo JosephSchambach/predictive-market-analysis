@@ -14,7 +14,7 @@ class MLModelSelect():
         if params == {}: 
             self.no_model = True
             return
-        self.models = ['Long-Short-Term-Memory']
+        self.models = ['Long-Short-Term-Memory', 'Naive', 'ARIMA']
         self.model = [params['model']] if 'model' in params and params['model'] in self.models else self.models[0]
         self.lookback = int(params['lookback'])
         self.forecast = int(params['forecast'])

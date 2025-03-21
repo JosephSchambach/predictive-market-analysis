@@ -121,3 +121,6 @@
 2025-03-20 21:19:35,150 - custom_logger - ERROR - An error occurred processing the ArimaModel model: Pandas data cast to numpy dtype of object. Check input data with np.asarray(data).
 2025-03-20 21:53:34,163 - custom_logger - ERROR - An error occurred processing the ArimaModel model: 0
 2025-03-20 21:55:19,369 - custom_logger - ERROR - An error occurred processing the ArimaModel model: 'int' object is not iterable
+2025-03-21 06:35:23,440 - custom_logger - ERROR - An error occurred processing the LSTMModel model: input.size(-1) must be equal to input_size. Expected 5, got 1
+2025-03-21 06:40:11,625 - custom_logger - CRITICAL - Database select action select failed with error: {'code': '42P01', 'details': None, 'hint': None, 'message': 'relation "public._" does not exist'}
+2025-03-21 06:40:11,680 - custom_logger - ERROR - Error setting up layout: String or int arguments are only possible when a DataFrame or an array is provided in the `data_frame` argument. No DataFrame was provided, but argument 'x' is of type str or int.
