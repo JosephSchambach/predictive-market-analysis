@@ -3,6 +3,8 @@ from predictive_ma.dashboard.callback_classes import StockDropDown, TimeFrameDro
 from predictive_ma.database.database_config import Database
 from predictive_ma.ml_model.model_config import MLModelConfig
 from predictive_ma.ml_model.neural_network import LSTMModel
+from predictive_ma.ml_model.naive_forecast import NaiveForecast
+from predictive_ma.ml_model.arima_forecast import ArimaModel
 import plotly.express as px
 import pandas as pd
 
@@ -22,9 +24,9 @@ class DashBoard():
         self.stock = 'aapl'
         self.timeframe = 'daily'
         self.default_data = self.database.select(f'{self.stock}_{self.timeframe}', ['date', 'close'])
-        self.stock_symbols = ['AAPL', 'MSFT', 'GOOGL', 'AMZN', 'TSLA']
-        self.timeframes = ['daily', 'weekly', 'monthly']
-        self.machine_learning_models = ['','Long-Short-Term-Memory']
+        self.stock_symbols = ['', 'AAPL', 'MSFT', 'GOOGL', 'AMZN', 'TSLA']
+        self.timeframes = ['', 'daily', 'weekly', 'monthly']
+        self.machine_learning_models = ['','Long-Short-Term-Memory', 'Naive', 'ARIMA']
 
     def layout(self, title: str, subtitle: str = None):
         self.logger.log('Setting up the layout')
@@ -127,6 +129,12 @@ class DashBoard():
                 if ml_model.model[0] == 'Long-Short-Term-Memory':
                     self.logger.log('Running LSTM model')
                     self.default_data = self.model.forecast(LSTMModel(data=self.default_data, forecast_steps=ml_model.forecast, lookback=ml_model.lookback))
+                elif ml_model.model[0] == 'Naive':
+                    self.logger.log('Running Naive model')
+                    self.default_data = self.model.forecast(NaiveForecast(data=self.default_data, forecast_steps=ml_model.forecast))
+                elif ml_model.model[0] == 'ARIMA':
+                    self.logger.log('Running ARIMA model')
+                    self.default_data = self.model.forecast(ArimaModel(data=self.default_data, forecast_steps=ml_model.forecast))
         except Exception as e:
             raise ValueError(f"Invalid callback model: {e}")
 
