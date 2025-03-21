@@ -6,10 +6,15 @@ from predictive_ma.api import dashboard_api
 import pandas as pd
 import requests 
 import json
+import math
 from predictive_ma.database.etl_class import ETLClass
+from predictive_ma.ml_model.arima_forecast import ArimaModel
 
 context = MarketPredictorContext()
 data = context.database.select('aapl_daily', ['date', 'close'])
+forecast = context.model.forecast(ArimaModel(data, 5))
+
+
 forecast = context.model.forecast(NaiveForecast(data, 5))
 
 context.dashboard.layout('Stock Price Dashboard', subtitle='Interactive Dashboard: Change Stock Symbol and Timeframe and select Machine Learning Forecast parameters if desired')
