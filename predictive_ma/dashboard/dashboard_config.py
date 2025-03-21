@@ -24,8 +24,8 @@ class DashBoard():
         self.stock = 'aapl'
         self.timeframe = 'daily'
         self.default_data = self.database.select(f'{self.stock}_{self.timeframe}', ['date', 'close'])
-        self.stock_symbols = ['', 'AAPL', 'MSFT', 'GOOGL', 'AMZN', 'TSLA']
-        self.timeframes = ['', 'daily', 'weekly', 'monthly']
+        self.stock_symbols = ['AAPL', 'MSFT', 'GOOGL', 'AMZN', 'TSLA']
+        self.timeframes = ['daily', 'weekly', 'monthly']
         self.machine_learning_models = ['','Long-Short-Term-Memory', 'Naive', 'ARIMA']
 
     def layout(self, title: str, subtitle: str = None):
