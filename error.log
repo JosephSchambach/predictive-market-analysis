@@ -114,3 +114,10 @@
 2025-03-06 07:14:37,839 - custom_logger - CRITICAL - Database select action select failed with error: {'code': '42P01', 'details': None, 'hint': None, 'message': 'relation "public.tsla_daily" does not exist'}
 2025-03-06 07:14:40,182 - custom_logger - CRITICAL - Database select action select failed with error: {'code': '42P01', 'details': None, 'hint': None, 'message': 'relation "public.tsla_weekly" does not exist'}
 2025-03-06 07:14:41,480 - custom_logger - CRITICAL - Database select action select failed with error: {'code': '42P01', 'details': None, 'hint': None, 'message': 'relation "public.tsla_monthly" does not exist'}
+2025-03-12 06:48:30,184 - custom_logger - ERROR - An error occurred processing the model: An error occurred forecasting the data: bad operand type for unary -: 'method'
+2025-03-20 21:06:51,937 - custom_logger - ERROR - An error occurred processing the ArimaModel model: exog contains inf or nans
+2025-03-20 21:11:55,832 - custom_logger - ERROR - An error occurred processing the ArimaModel model: An error occurred determining the lag and moving average: float() argument must be a string or a real number, not 'Timestamp'
+2025-03-20 21:18:03,482 - custom_logger - ERROR - An error occurred processing the ArimaModel model: Pandas data cast to numpy dtype of object. Check input data with np.asarray(data).
+2025-03-20 21:19:35,150 - custom_logger - ERROR - An error occurred processing the ArimaModel model: Pandas data cast to numpy dtype of object. Check input data with np.asarray(data).
+2025-03-20 21:53:34,163 - custom_logger - ERROR - An error occurred processing the ArimaModel model: 0
+2025-03-20 21:55:19,369 - custom_logger - ERROR - An error occurred processing the ArimaModel model: 'int' object is not iterable

@@ -7,15 +7,16 @@ class MLModelConfig():
     
     def forecast(self, model):
         try:
-            self.logger.log('Processing the model')
+            model_type = type(model).__name__
+            self.logger.log(f'Processing the {model_type} model')
             model_results = model.run()
             if not model_results.empty:
-                self.logger.log(f"Successfully process model results for the model")
+                self.logger.log(f"Successfully processed {model_type} results")
                 return model_results
             else:
-                self.logger.log("Model results are empty", 'ERROR')
+                self.logger.log(f"{model_type} results are empty", 'ERROR')
                 raise ValueError("Model results are empty")
         except Exception as e:
-            self.logger.log(f"An error occurred processing the model: {str(e)}", 'ERROR')
+            self.logger.log(f"An error occurred processing the {model_type} model: {str(e)}", 'ERROR')
             return None
         
